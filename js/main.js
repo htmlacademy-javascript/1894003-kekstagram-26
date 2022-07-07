@@ -3,26 +3,6 @@ function checkStringLength (string, length) {
   return string.length <= length;
 }
 
-/*
-Структура каждого объекта должна быть следующей:
-
-id, число — идентификатор описания. Это число от 1 до 25. Идентификаторы не должны повторяться.
-
-url, строка — адрес картинки вида photos/{{i}}.jpg, где {{i}} — это число от 1 до 25. Адреса картинок не должны повторяться.
-
-description, строка — описание фотографии. Описание придумайте самостоятельно.
-
-likes, число — количество лайков, поставленных фотографии. Случайное число от 15 до 200.
-
-comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к каждой фотографии вы определяете на своё усмотрение. Все комментарии генерируются случайным образом. Пример описания объекта с комментарием:
-
-{
-  id: 135,
-  avatar: 'img/avatar-6.svg',
-  message: 'В целом всё неплохо. Но не всё.',
-  name: 'Артём',
-}*/
-
 const DESCRIPTION = [
   'Первое фото',
   'Второе фото',
@@ -70,7 +50,7 @@ const NAMES = [
   'Марина',
   'Алевтина',
   'Иван'
-]
+];
 
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -83,23 +63,14 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomPositiveInteger(0, elements.length - 1)];
 };
 
-const createComment = () => {
-  return {
-    id: getId(commentsId,1,100000000),
-    avatar: `img/avatar-${getRandomPositiveInteger(1,25)}.svg`,
-    message: selectMessage(),
-    name: NAMES[getRandomPositiveInteger(0,NAMES.length - 1)]
-  };
-};
-
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
   const firstNumber =  getRandomPositiveInteger(0,MESSAGE.length - 1);
   if (count === 1) {
     return [
       MESSAGE[firstNumber]
-    ]
-  }
+    ];
+  };
 
   let secondNumber = getRandomPositiveInteger(0,MESSAGE.length - 1);
   while (firstNumber === secondNumber) {
@@ -108,7 +79,16 @@ const selectMessage = () => {
   return [
     MESSAGE[firstNumber],
     MESSAGE[secondNumber]
-  ]
+  ];
+};
+
+const createComment = () => {
+  return {
+    id: getId(commentsId,1,100000000),
+    avatar: `img/avatar-${getRandomPositiveInteger(1,25)}.svg`,
+    message: selectMessage(),
+    name: NAMES[getRandomPositiveInteger(0,NAMES.length - 1)]
+  };
 };
 
 const createPhoto = () => {
@@ -133,7 +113,7 @@ const getId = (list, min, max) => {
 }
  list.push(id);
  return id;
-}
+};
 
 const similarPhotos = Array.from({length: 25}, createPhoto);
 
