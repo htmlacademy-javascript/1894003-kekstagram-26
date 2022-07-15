@@ -53,24 +53,23 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomPositiveInteger(0, elements.length - 1)];
 };
 
+getRandomArrayElement();
+
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
   const firstNumber =  getRandomPositiveInteger(0,MESSAGE.length - 1);
   if (count === 1) {
-    return [
-      MESSAGE[firstNumber]
-    ];
+    return MESSAGE[firstNumber];
   };
 
   let secondNumber = getRandomPositiveInteger(0,MESSAGE.length - 1);
   while (firstNumber === secondNumber) {
     secondNumber = getRandomPositiveInteger(0,MESSAGE.length - 1);
   }
-  return [
-    MESSAGE[firstNumber],
-    MESSAGE[secondNumber]
-  ];
+  return `${MESSAGE[firstNumber]} ${MESSAGE[secondNumber]}`;
 };
+
+const commentsId = [];
 
 const createComment = () => {
   return {
@@ -81,6 +80,18 @@ const createComment = () => {
   };
 };
 
+const photosId = [];
+
+const getId = (list, min, max) => {
+  let id = getRandomPositiveInteger(min, max);
+
+  while (list.findIndex(element => element === id) !== -1) {
+   id = getRandomPositiveInteger(min, max);
+ }
+  list.push(id);
+  return id;
+};
+
 const createPhoto = () => {
   return {
     id: getId(photosId,1,25),
@@ -89,20 +100,6 @@ const createPhoto = () => {
     likes: getRandomPositiveInteger(15,200),
     comments: Array.from({length: getRandomPositiveInteger(1,25)}, createComment)
   };
-};
-
-const photosId = [];
-
-const commentsId = [];
-
-const getId = (list, min, max) => {
- let id = getRandomPositiveInteger(min, max);
-
- while (list.findIndex(element => element === id) !== -1) {
-  id = getRandomPositiveInteger(min, max);
-}
- list.push(id);
- return id;
 };
 
 const similarPhotos = () => Array.from({length: 25}, createPhoto);
