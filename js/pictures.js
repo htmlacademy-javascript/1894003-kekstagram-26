@@ -8,12 +8,11 @@
 </a>
 </template>*/
 
-import {createPhotos} from './data.js';
+import {similarPhotos} from './data.js';
+import { showBigPicture } from './pictures-big.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const uploadList = document.querySelector('.pictures');
-
-const similarPhotos = createPhotos();
 
 // функция, которая будет рендерить нам одно изображение
 // в аргументе picture - объект с данными для отрисовки
@@ -23,6 +22,11 @@ const renderPicture = (picture) => {
   pictureElement.querySelector('.picture__img').src = picture.img;
   pictureElement.querySelector('.picture__likes').textContent = picture.likes;
   pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+
+  pictureElement.addEventListener('click', (e) => {
+    e.preventDefault()
+    showBigPicture(picture)
+  })
 
   return pictureElement
 }

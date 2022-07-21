@@ -1,4 +1,4 @@
-import {createPhotos} from './data.js';
+export {createPhotos, similarPhotos};
 import './pictures.js';
 import './pictures-big.js';
 

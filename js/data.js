@@ -53,8 +53,6 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomPositiveInteger(0, elements.length - 1)];
 };
 
-getRandomArrayElement();
-
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
   const firstNumber =  getRandomPositiveInteger(0,MESSAGE.length - 1);
@@ -104,4 +102,6 @@ const makePhoto = () => {
 
 const createPhotos = () => Array.from({length: 25}, makePhoto);
 
-export {createPhotos};
+const similarPhotos = createPhotos();
+
+export {createPhotos, similarPhotos};
