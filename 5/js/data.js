@@ -86,7 +86,7 @@ const createComment = () => ({
 
 const makePhoto = () => ({
   id: getId(photosId,1,25),
-  url: `photos/{{${getRandomPositiveInteger(1,25)}}}.jpg`,
+  url: `photos/${getRandomPositiveInteger(1,25)}.jpg`,
   description: DESCRIPTION[getRandomPositiveInteger(0,DESCRIPTION.length - 1)],
   likes: getRandomPositiveInteger(15,200),
   comments: Array.from({length: getRandomPositiveInteger(1,25)}, createComment)
