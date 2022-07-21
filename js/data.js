@@ -92,7 +92,7 @@ const getId = (list, min, max) => {
   return id;
 };
 
-const createPhoto = () => {
+const makePhoto = () => {
   return {
     id: getId(photosId,1,25),
     url: `photos/{{${getRandomPositiveInteger(1,25)}}}.jpg`,
@@ -102,6 +102,6 @@ const createPhoto = () => {
   };
 };
 
-const similarPhotos = () => Array.from({length: 25}, createPhoto);
+const createPhotos = () => Array.from({length: 25}, makePhoto);
 
-export {similarPhotos};
+export {createPhotos};
