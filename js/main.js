@@ -1,3 +1,3 @@
-import {similarPhotos} from './data.js';
+import './pictures.js';
+import './pictures-big.js';
 
-console.log(similarPhotos);

@@ -1,8 +1,3 @@
-//Функция checkStringLength для проверки максимальной длины строки
-function checkStringLength (string, length) {
-  return string.length <= length;
-}
-
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));

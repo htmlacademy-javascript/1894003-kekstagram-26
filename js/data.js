@@ -49,18 +49,12 @@ const NAMES = [
   'Иван'
 ];
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomPositiveInteger(0, elements.length - 1)];
-};
-
-getRandomArrayElement();
-
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
   const firstNumber =  getRandomPositiveInteger(0,MESSAGE.length - 1);
   if (count === 1) {
     return MESSAGE[firstNumber];
-  };
+  }
 
   let secondNumber = getRandomPositiveInteger(0,MESSAGE.length - 1);
   while (firstNumber === secondNumber) {
@@ -71,37 +65,35 @@ const selectMessage = () => {
 
 const commentsId = [];
 
-const createComment = () => {
-  return {
-    id: getId(commentsId,1,100000000),
-    avatar: `img/avatar-${getRandomPositiveInteger(1,25)}.svg`,
-    message: selectMessage(),
-    name: NAMES[getRandomPositiveInteger(0,NAMES.length - 1)]
-  };
-};
-
 const photosId = [];
 
 const getId = (list, min, max) => {
   let id = getRandomPositiveInteger(min, max);
 
-  while (list.findIndex(element => element === id) !== -1) {
-   id = getRandomPositiveInteger(min, max);
- }
+  while (list.findIndex((element) => element === id) !== -1) {
+    id = getRandomPositiveInteger(min, max);
+  }
   list.push(id);
   return id;
 };
 
-const createPhoto = () => {
-  return {
-    id: getId(photosId,1,25),
-    url: `photos/{{${getRandomPositiveInteger(1,25)}}}.jpg`,
-    description: DESCRIPTION[getRandomPositiveInteger(0,DESCRIPTION.length - 1)],
-    likes: getRandomPositiveInteger(15,200),
-    comments: Array.from({length: getRandomPositiveInteger(1,25)}, createComment)
-  };
-};
+const createComment = () => ({
+  id: getId(commentsId,1,100000000),
+  avatar: `img/avatar-${getRandomPositiveInteger(1,25)}.svg`,
+  message: selectMessage(),
+  name: NAMES[getRandomPositiveInteger(0,NAMES.length - 1)]
+});
 
-const similarPhotos = () => Array.from({length: 25}, createPhoto);
+const makePhoto = () => ({
+  id: getId(photosId,1,25),
+  url: `photos/${getRandomPositiveInteger(1,25)}.jpg`,
+  description: DESCRIPTION[getRandomPositiveInteger(0,DESCRIPTION.length - 1)],
+  likes: getRandomPositiveInteger(15,200),
+  comments: Array.from({length: getRandomPositiveInteger(1,25)}, createComment)
+});
 
-export {similarPhotos};
+const createPhotos = () => Array.from({length: 25}, makePhoto);
+
+const similarPhotos = createPhotos();
+
+export {createPhotos, similarPhotos};
