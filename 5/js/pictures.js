@@ -1,13 +1,3 @@
-/*<template id="picture">
-<a href="#" class="picture">
-  <img class="picture__img" src="" width="182" height="182" alt="Случайная фотография">
-  <p class="picture__info">
-    <span class="picture__comments"></span>
-    <span class="picture__likes"></span>
-  </p>
-</a>
-</template>*/
-
 import {similarPhotos} from './data.js';
 import { showBigPicture } from './pictures-big.js';
 
@@ -24,27 +14,27 @@ const renderPicture = (picture) => {
   pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
 
   pictureElement.addEventListener('click', (e) => {
-    e.preventDefault()
-    showBigPicture(picture)
-  })
+    e.preventDefault();
+    showBigPicture(picture);
+  });
 
-  return pictureElement
-}
+  return pictureElement;
+};
 
 // функция, которая будет рендерить сразу несколько фоток
 // в аргументе pictures массив с данными фоток
 // из функции возвращаем фрагмент, наполненный DOM-элементами
 const renderPictures = (pictures) => {
   // создаём фрагмент
-  const fragment = document.createDocumentFragment()
+  const fragment = document.createDocumentFragment();
 
   // обходим массив pictures, на каждой итерации рендерим один элемент
   pictures.forEach((picture) => {
-    fragment.appendChild(renderPicture(picture))
-  })
+    fragment.appendChild(renderPicture(picture));
+  });
 
-  return fragment
-}
+  return fragment;
+};
 
 // функцией renderPictures рендерим все фотографии и сразу вставляем из в uploadList
-uploadList.appendChild(renderPictures(similarPhotos))
+uploadList.appendChild(renderPictures(similarPhotos));
