@@ -3,7 +3,7 @@
 const modalWindow = document.querySelector('.big-picture');
 
 const renderComments = (picture) => {
-  const globalFragment = document.createDocumentFragment();
+  const bigFragment = document.createDocumentFragment();
 
   picture.comments.forEach((comment) => {
     const liElement = document.createElement('li');
@@ -17,15 +17,14 @@ const renderComments = (picture) => {
 
     imgElement.src = comment.avatar;
     imgElement.alt = comment.name;
-    imgElement.width = "35";
-    imgElement.height = "35";
+    imgElement.width = '35';
+    imgElement.height = '35';
     paragraphElement.textContent = comment.message;
     liElement.appendChild(imgElement);
     liElement.appendChild(paragraphElement);
-    globalFragment.appendChild(liElement);
+    bigFragment.appendChild(liElement);
   });
-  console.log(globalFragment);
-  return globalFragment;
+  return bigFragment;
 };
 
 const showBigPicture = (picture) => {

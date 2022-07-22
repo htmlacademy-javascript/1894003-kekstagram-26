@@ -49,9 +49,7 @@ const NAMES = [
   'Иван'
 ];
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomPositiveInteger(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
