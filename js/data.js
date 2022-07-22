@@ -49,6 +49,10 @@ const NAMES = [
   'Иван'
 ];
 
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomPositiveInteger(0, elements.length - 1)];
+};
+
 const selectMessage = () => {
   const count = getRandomPositiveInteger(1,2);
   const firstNumber =  getRandomPositiveInteger(0,MESSAGE.length - 1);
@@ -79,7 +83,7 @@ const getId = (list, min, max) => {
 
 const createComment = () => ({
   id: getId(commentsId,1,100000000),
-  avatar: `img/avatar-${getRandomPositiveInteger(1,25)}.svg`,
+  avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
   message: selectMessage(),
   name: NAMES[getRandomPositiveInteger(0,NAMES.length - 1)]
 });
@@ -96,4 +100,4 @@ const createPhotos = () => Array.from({length: 25}, makePhoto);
 
 const similarPhotos = createPhotos();
 
-export {createPhotos, similarPhotos};
+export {createPhotos, similarPhotos, getRandomArrayElement};
