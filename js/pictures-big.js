@@ -34,7 +34,7 @@ let commentsForPicture = null;
 const changeCommentsCount = () => {
   const socialCommentsCount = modalWindow.querySelector('.social__comment-count');
   socialCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${commentsLenth}</span> комментариев`;
-}
+};
 
 const showBigPicture = (picture) => {
   modalWindow.classList.remove('hidden');
@@ -75,7 +75,7 @@ commentsLoader.addEventListener('click', () => {
   comments.innerHTML = null;
   comments.appendChild(renderComments(commentsForPicture.slice(0, commentsCount)));
   changeCommentsCount();
-} )
+} );
 
 const hideBigPhoto = () => {
   modalWindow.classList.add('hidden');
