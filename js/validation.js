@@ -15,7 +15,7 @@ export const checkHashTag = [
     test: (list) =>
       list.every(
         (hashtag) =>
-          [...hashtag].findLastIndex((symbol) => symbol === "#") === 0
+          [...hashtag].findLastIndex((symbol) => symbol === '#') === 0
       ), //проверка на пробелы между хэш-тегами
   },
   {
