@@ -15,9 +15,9 @@ const EFFECTS = [
   {name: 'none', filter: 'none', setEffect: () => ''},
   {name: 'chrome', filter: 'grayscale', minValue: 0, maxValue: 1, setEffect: (value) => `filter: grayscale(${value})`},
   {name: 'sepia', filter: 'sepia', minValue: 0, maxValue: 1, setEffect: (value) => `filter: sepia(${value})`},
-  {name: 'marvin', filter: 'invert', minValue: 0, maxValue: 100, setEffect: (value) => `filter: marvin(${value})`},
-  {name: 'phobos', filter: 'blur', minValue: 0, maxValue: 3, setEffect: (value) => `filter: phobos(${value})`},
-  {name: 'heat', filter: 'brightness', minValue: 1, maxValue: 3, setEffect: (value) => `filter: heat(${value})`}
+  {name: 'marvin', filter: 'invert', minValue: 0, maxValue: 100, setEffect: (value) => `filter: invert(${value})`},
+  {name: 'phobos', filter: 'blur', minValue: 0, maxValue: 3, setEffect: (value) => `filter: blur(${value})`},
+  {name: 'heat', filter: 'brightness', minValue: 1, maxValue: 3, setEffect: (value) => `filter: brightness(${value})`}
 ];
 
 valueElement.value = 100;
@@ -42,13 +42,19 @@ sliderElement.noUiSlider.on('update', () => {
 originalElement.addEventListener('click', () => {
   currentEffect = 'none';
   sliderContainer.classList.add('hidden');
+  imgUploadPreview.classList.remove('effects__preview--chrome');
+  imgUploadPreview.classList.remove('effects__preview--sepia');
+  imgUploadPreview.classList.remove('effects__preview--marvin');
+  imgUploadPreview.classList.remove('effects__preview--phobos');
+  imgUploadPreview.classList.remove('effects__preview--heat');
+  imgUploadPreview.style = EFFECTS[0];
 });
 
 //хром
 chromeElement.addEventListener('click', () => {
   currentEffect = 'chrome';
   sliderContainer.classList.remove('hidden');
-  chromeElement.classList.add('effects__preview--chrome');
+  imgUploadPreview.classList.add('effects__preview--chrome');
   // imgUploadPreview.style ='filter: grayscale(1)';
   imgUploadPreview.style = EFFECTS[1].setEffect(1);
   sliderElement.noUiSlider.updateOptions({
@@ -65,7 +71,7 @@ chromeElement.addEventListener('click', () => {
 sepiaElement.addEventListener('click', () => {
   currentEffect = 'sepia';
   sliderContainer.classList.remove('hidden');
-  sepiaElement.classList.add('effects__preview--sepia');
+  imgUploadPreview.classList.add('effects__preview--sepia');
   imgUploadPreview.style = EFFECTS[2].setEffect(1);
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -81,7 +87,7 @@ sepiaElement.addEventListener('click', () => {
 marvinElement.addEventListener('click', () => {
   currentEffect = 'marvin';
   sliderContainer.classList.remove('hidden');
-  marvinElement.classList.add('effects__preview--marvin');
+  imgUploadPreview.classList.add('effects__preview--marvin');
   imgUploadPreview.style = EFFECTS[3].setEffect(100);
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -97,7 +103,7 @@ marvinElement.addEventListener('click', () => {
 phobosElement.addEventListener('click', () => {
   currentEffect = 'phobos';
   sliderContainer.classList.remove('hidden');
-  phobosElement.classList.add('effects__preview-phobos');
+  imgUploadPreview.classList.add('effects__preview--phobos');
   imgUploadPreview.style = EFFECTS[4].setEffect(3);
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -113,7 +119,7 @@ phobosElement.addEventListener('click', () => {
 heatElement.addEventListener('click', () => {
   currentEffect = 'heat';
   sliderContainer.classList.remove('hidden');
-  heatElement.classList.add('effects__preview-heat');
+  imgUploadPreview.classList.add('effects__preview--heat');
   imgUploadPreview.style = EFFECTS[5].setEffect(3);
   sliderElement.noUiSlider.updateOptions({
     range: {
