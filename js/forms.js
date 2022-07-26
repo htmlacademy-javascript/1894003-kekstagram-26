@@ -1,4 +1,4 @@
-import { checkHashTag } from './validation.js';
+import './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const uploadForm = document.querySelector('.img-upload__overlay');
@@ -22,15 +22,4 @@ document.addEventListener('keydown', (evt) => {
     uploadForm.classList.add('hidden');
     document.body.classList.remove('modal-open');
   }
-});
-
-hashtagInput.addEventListener('blur', () => {
-  const hashtagList = hashtagInput.value.trim().split(' ');
-  hashtagInput.value = hashtagInput.value.trim();
-  let errorText = '';
-  checkHashTag.forEach((validation) => {
-    if (!validation.test(hashtagList)) {
-      errorText = validation.error;
-    }
-  });
 });
