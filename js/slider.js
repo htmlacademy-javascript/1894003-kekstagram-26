@@ -13,11 +13,11 @@ sliderContainer.classList.add('hidden');
 
 const EFFECTS = [
   {name: 'none', filter: 'none', setEffect: () => ''},
-  {name: 'chrome', filter: 'grayscale', minValue: 0, maxValue: 1, setEffect: (value) => `filter: grayscale(${value})`},
-  {name: 'sepia', filter: 'sepia', minValue: 0, maxValue: 1, setEffect: (value) => `filter: sepia(${value})`},
-  {name: 'marvin', filter: 'invert', minValue: 0, maxValue: 100, setEffect: (value) => `filter: invert(${value})`},
-  {name: 'phobos', filter: 'blur', minValue: 0, maxValue: 3, setEffect: (value) => `filter: blur(${value})`},
-  {name: 'heat', filter: 'brightness', minValue: 1, maxValue: 3, setEffect: (value) => `filter: brightness(${value})`}
+  {name: 'chrome', filter: 'grayscale', minValue: 0, maxValue: 1, setEffect: (value) => `grayscale(${value})`},
+  {name: 'sepia', filter: 'sepia', minValue: 0, maxValue: 1, setEffect: (value) => `sepia(${value})`},
+  {name: 'marvin', filter: 'invert', minValue: 0, maxValue: 100, setEffect: (value) => `invert(${Number(value)}%)`},
+  {name: 'phobos', filter: 'blur', minValue: 0, maxValue: 3, setEffect: (value) => `blur(${value}px)`},
+  {name: 'heat', filter: 'brightness', minValue: 1, maxValue: 3, setEffect: (value) => `brightness(${value})`}
 ];
 
 valueElement.value = 100;
@@ -31,11 +31,11 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-sliderElement.noUiSlider.on('update', () => {
-  const currentSliderValue = sliderElement.noUiSlider.get();
+sliderElement.noUiSlider.on('update', (values) => {
+  const currentSliderValue = (values[0]);
   valueElement.value = currentSliderValue;
   const selectedEffect = EFFECTS.find((effect) => effect.name === currentEffect);
-  imgUploadPreview.style = selectedEffect.setEffect(currentSliderValue);
+  imgUploadPreview.style.filter = selectedEffect.setEffect(currentSliderValue);
 });
 
 //оригинал
