@@ -5,4 +5,15 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
-export {getRandomPositiveInteger};
+const showAlert = () => {
+  const errorMessage = document.getElementById('error').content.cloneNode(true);
+  document.body.appendChild(errorMessage);
+  //исчезает форма
+};
+
+const showSuccess = () => {
+  const successMessage = document.getElementById('#error').content.cloneNode(true);
+  document.body.appendChild(successMessage);
+};
+
+export {getRandomPositiveInteger, showAlert, showSuccess};

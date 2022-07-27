@@ -1,8 +1,8 @@
-import {similarPhotos} from './data.js';
+// import {similarPhotos} from './data.js';
 import { showBigPicture } from './pictures-big.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const uploadList = document.querySelector('.pictures');
+// const uploadList = document.querySelector('.pictures');
 
 // функция, которая будет рендерить нам одно изображение
 // в аргументе picture - объект с данными для отрисовки
@@ -37,4 +37,6 @@ const renderPictures = (pictures) => {
 };
 
 // функцией renderPictures рендерим все фотографии и сразу вставляем из в uploadList
-uploadList.appendChild(renderPictures(similarPhotos));
+// uploadList.appendChild(renderPictures(similarPhotos));
+
+export { renderPictures };
