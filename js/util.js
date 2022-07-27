@@ -1,3 +1,5 @@
+const uploadForm = document.querySelector('.img-upload__overlay');
+
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -6,14 +8,15 @@ const getRandomPositiveInteger = (a, b) => {
 };
 
 const showAlert = () => {
-  const errorMessage = document.getElementById('error').content.cloneNode(true);
+  const errorMessage = document.querySelector('#error').content.cloneNode(true);
   document.body.appendChild(errorMessage);
-  //исчезает форма
+  uploadForm.classList.add('hidden');
 };
 
 const showSuccess = () => {
-  const successMessage = document.getElementById('#error').content.cloneNode(true);
+  const successMessage = document.querySelector('#success').content.cloneNode(true);
   document.body.appendChild(successMessage);
+  uploadForm.classList.add('hidden');
 };
 
 export {getRandomPositiveInteger, showAlert, showSuccess};
