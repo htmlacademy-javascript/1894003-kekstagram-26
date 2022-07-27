@@ -62,7 +62,7 @@ const showBigPicture = (picture) => {
 
 const commentsLoader = modalWindow.querySelector('.comments-loader');
 
-commentsLoader.addEventListener('click', () => {
+const addNextComments = () => {
 
   if(commentsLenth > commentsCount + 5) {
     commentsCount += 5;
@@ -75,24 +75,33 @@ commentsLoader.addEventListener('click', () => {
   comments.innerHTML = null;
   comments.appendChild(renderComments(commentsForPicture.slice(0, commentsCount)));
   changeCommentsCount();
-} );
+};
+
+commentsLoader.addEventListener('click', addNextComments);
 
 const hideBigPhoto = () => {
   modalWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  commentsLoader.removeEventListener('click', addNextComments);
 };
 
 const closeModalButton = modalWindow.querySelector('.big-picture__cancel');
 
-closeModalButton.addEventListener('click', () => {
+const onClickCloseButton = () => {
   modalWindow.classList.add('hidden');
   hideBigPhoto();
-});
+  closeModalButton.removeEventListener('click', onClickCloseButton);
+};
 
-document.addEventListener('keydown', (evt) => {
+closeModalButton.addEventListener('click', onClickCloseButton);
+
+const onPressEsc = (evt) => {
   if (evt.key === 'Escape') {
     hideBigPhoto();
   }
-});
+  document.removeEventListener('keydown', onPressEsc);
+};
+
+document.addEventListener('keydown', onPressEsc);
 
 export { showBigPicture };
