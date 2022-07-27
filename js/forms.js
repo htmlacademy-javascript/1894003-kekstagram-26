@@ -39,11 +39,6 @@ document.addEventListener('keydown', closeOnKeyForm);
 const onPressSubmit = (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
-  // const formData = {
-  //   hashTags: hashtagInput.value,
-  //   description: commentTextarea.value,
-  //   picture: imgUploadPreview.src,
-  // };
   sendImageAJAX(formData, showSuccess, showAlert);
 };
 

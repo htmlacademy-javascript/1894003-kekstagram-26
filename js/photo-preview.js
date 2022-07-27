@@ -1,5 +1,5 @@
 const uploadInput = document.querySelector('.img-upload__input');
-const imgPreview = document.querySelector('.img-upload__preview');
+const imgPreview = document.querySelector('.img-upload__preview img');
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
