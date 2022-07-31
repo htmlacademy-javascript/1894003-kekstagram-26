@@ -1,7 +1,11 @@
-export const checkHashTag = [
+import { showSuccess, showAlert } from './util.js';
+import { sendImageAJAX } from './api.js';
+
+export const checkingHashTags = [
   {
     error: 'Хэш-теги должны быть уникальными',
-    test: (list) => new Set(list.map((tag) => tag.toLowerCase())).size === list.length, //проверка на повторы
+    test: (list) =>
+      new Set(list.map((tag) => tag.toLowerCase())).size === list.length, //проверка на повторы
   },
   {
     error: 'Содержимое не соответствует требованиям',
@@ -14,7 +18,8 @@ export const checkHashTag = [
     error: 'Хэш-теги разделяются пробелами',
     test: (list) =>
       list.every(
-        (hashtag) => [...hashtag].findLastIndex((symbol) => symbol === '#') === 0
+        (hashtag) =>
+          [...hashtag].findLastIndex((symbol) => symbol === '#') === 0
       ), //проверка на пробелы между хэш-тегами
   },
   {
@@ -28,18 +33,30 @@ const hashtagInput = document.querySelector('.text__hashtags');
 
 export const pristine = new Pristine(uploadForm);
 
-pristine.addValidator(hashtagInput, (value) => {
-  if (value.trim() === '') {
-    return true;
-  }
+pristine.addValidator(
+  hashtagInput,
+  (value) => {
+    if (value.trim() === '') {
+      return true;
+    }
 
-  const hashtagList = value.trim().split(' ');
+    const hashtagList = value
+      .trim()
+      .split(' ')
+      .filter((elem) => !!elem);
 
-  return checkHashTag.every(({ test }) => test(hashtagList));
-}, 'Неверный формат хештегов');
+    return checkingHashTags.every(({ test }) => test(hashtagList));
+  },
+  'Неверный формат хештегов'
+);
 
-uploadForm.addEventListener('submit', (e) => {
+const onPressSubmit = (e) => {
+  e.preventDefault();
   if (!pristine.validate()) {
-    e.preventDefault();
+    return;
   }
-});
+  const formData = new FormData(e.target);
+  sendImageAJAX(formData, showSuccess, showAlert);
+};
+
+uploadForm.addEventListener('submit', onPressSubmit);

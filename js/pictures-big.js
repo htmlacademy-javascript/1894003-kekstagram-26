@@ -1,5 +1,3 @@
-// import {similarPhotos} from './data';
-
 const modalWindow = document.querySelector('.big-picture');
 
 const renderComments = (comments) => {
@@ -32,7 +30,9 @@ let commentsLenth = null;
 let commentsForPicture = null;
 
 const changeCommentsCount = () => {
-  const socialCommentsCount = modalWindow.querySelector('.social__comment-count');
+  const socialCommentsCount = modalWindow.querySelector(
+    '.social__comment-count'
+  );
   socialCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${commentsLenth}</span> комментариев`;
 };
 
@@ -43,17 +43,21 @@ const showBigPicture = (picture) => {
 
   modalWindow.querySelector('.big-picture__img img').src = picture.url;
   modalWindow.querySelector('.likes-count').textContent = picture.likes;
-  modalWindow.querySelector('.comments-count').textContent = picture.comments.length;
+  modalWindow.querySelector('.comments-count').textContent =
+    picture.comments.length;
   commentsLenth = picture.comments.length;
   commentsForPicture = picture.comments;
   modalWindow.querySelector('.comments-loader').classList.remove('hidden');
   commentsCount = 5;
-  modalWindow.querySelector('.social__caption').textContent = picture.description;
-  const comments = modalWindow.querySelector('.social__commentimg-upload__starts');
-  comments.innerHTML = null;
-  comments.appendChild(renderComments(picture.comments.slice(0, commentsCount)));
+  modalWindow.querySelector('.social__caption').textContent =
+    picture.description;
+  const comments = modalWindow.querySelector('.social__comments');
+  comments.innerHTML = '';
+  comments.appendChild(
+    renderComments(picture.comments.slice(0, commentsCount))
+  );
 
-  if(commentsLenth <= 5) {
+  if (commentsLenth <= 5) {
     modalWindow.querySelector('.comments-loader').classList.add('hidden');
     commentsCount = commentsLenth;
   }
@@ -63,17 +67,17 @@ const showBigPicture = (picture) => {
 const commentsLoader = modalWindow.querySelector('.comments-loader');
 
 const addNextComments = () => {
-
-  if(commentsLenth > commentsCount + 5) {
+  if (commentsLenth > commentsCount + 5) {
     commentsCount += 5;
-  }
-  else {
+  } else {
     commentsCount = commentsLenth;
     modalWindow.querySelector('.comments-loader').classList.add('hidden');
   }
-  const comments = modalWindow.querySelector('.social__commentimg-upload__starts');
-  comments.innerHTML = null;
-  comments.appendChild(renderComments(commentsForPicture.slice(0, commentsCount)));
+  const comments = modalWindow.querySelector('.social__comments');
+  comments.innerHTML = '';
+  comments.appendChild(
+    renderComments(commentsForPicture.slice(0, commentsCount))
+  );
   changeCommentsCount();
 };
 
@@ -82,7 +86,6 @@ commentsLoader.addEventListener('click', addNextComments);
 const hideBigPhoto = () => {
   modalWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  commentsLoader.removeEventListener('click', addNextComments);
 };
 
 const closeModalButton = modalWindow.querySelector('.big-picture__cancel');
@@ -90,7 +93,6 @@ const closeModalButton = modalWindow.querySelector('.big-picture__cancel');
 const onClickCloseButton = () => {
   modalWindow.classList.add('hidden');
   hideBigPhoto();
-  closeModalButton.removeEventListener('click', onClickCloseButton);
 };
 
 closeModalButton.addEventListener('click', onClickCloseButton);
@@ -99,7 +101,6 @@ const onPressEsc = (evt) => {
   if (evt.key === 'Escape') {
     hideBigPhoto();
   }
-  document.removeEventListener('keydown', onPressEsc);
 };
 
 document.addEventListener('keydown', onPressEsc);
