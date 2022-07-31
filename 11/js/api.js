@@ -3,9 +3,10 @@ import { getFilteredPhotos } from './util.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const filteredSection = document.querySelector('.img-filters');
+const API_URL = 'https://26.javascript.pages.academy/kekstagram/data';
 
 const loadImages = () => {
-  fetch('https://26.javascript.pages.academy/kekstagram/data')
+  fetch(API_URL)
     .then((response) => response.json())
     .then((photos) => {
       localStorage.setItem('photos', JSON.stringify(photos));
@@ -18,7 +19,7 @@ const loadImages = () => {
 loadImages();
 
 const sendImage = (data) => {
-  fetch('https://26.javascript.pages.academy/kekstagram', {
+  fetch(API_URL, {
     method: 'POST',
     body: data,
   });
@@ -40,7 +41,7 @@ const createRequest = (onSuccess, onError) => {
 // отправка данных на сервер
 const sendImageAJAX = (data, onLoad, onError) => {
   const xhr = createRequest(onLoad, onError);
-  xhr.open('POST', 'https://26.javascript.pages.academy/kekstagram');
+  xhr.open('POST', API_URL);
   xhr.send(data);
 };
 
