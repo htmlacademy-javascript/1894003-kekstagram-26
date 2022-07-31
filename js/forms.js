@@ -8,7 +8,6 @@ const commentTextarea = document.querySelector('.text__description');
 const onClickForm = () => {
   uploadForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  // uploadInput.removeEventListener('change', onClickForm);
 };
 
 uploadInput.addEventListener('change', onClickForm);
@@ -18,7 +17,6 @@ const closeUploadButton = document.querySelector('#upload-cancel');
 const closeOnClickForm = () => {
   uploadForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  // closeUploadButton.removeEventListener('click', closeOnClickForm);
 };
 
 closeUploadButton.addEventListener('click', closeOnClickForm);

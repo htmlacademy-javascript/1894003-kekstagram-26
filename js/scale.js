@@ -3,27 +3,27 @@ const scaleBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
-const SCALEVALUESTEP = 25;
-const MAXVALUE = 100;
-const MINVALUE = 25;
-let SCALEVALUESTART = 100;
+const SCALE_VALUE_STEP = 25;
+const MAX_VALUE = 100;
+const MIN_VALUE = 25;
+let SCALE_VALUE_START = 100;
 
 scaleBigger.addEventListener('click', () => {
-  if (SCALEVALUESTART + SCALEVALUESTEP > MAXVALUE) {
-    SCALEVALUESTART = MAXVALUE;
+  if (SCALE_VALUE_START + SCALE_VALUE_STEP > MAX_VALUE) {
+    SCALE_VALUE_START = MAX_VALUE;
   } else {
-    SCALEVALUESTART += SCALEVALUESTEP;
+    SCALE_VALUE_START += SCALE_VALUE_STEP;
   }
-  imgUploadPreview.style = `transform: scale(${SCALEVALUESTART / 100})`;
-  scaleValue.value = `${SCALEVALUESTART}%`;
+  imgUploadPreview.style = `transform: scale(${SCALE_VALUE_START / 100})`;
+  scaleValue.value = `${SCALE_VALUE_START}%`;
 });
 
 scaleSmaller.addEventListener('click', () => {
-  if (SCALEVALUESTART - SCALEVALUESTEP < MINVALUE) {
-    SCALEVALUESTART = MINVALUE;
+  if (SCALE_VALUE_START - SCALE_VALUE_STEP < MIN_VALUE) {
+    SCALE_VALUE_START = MIN_VALUE;
   } else {
-    SCALEVALUESTART -= SCALEVALUESTEP;
+    SCALE_VALUE_START -= SCALE_VALUE_STEP;
   }
-  imgUploadPreview.style = `transform: scale(${SCALEVALUESTART / 100})`;
-  scaleValue.value = `${SCALEVALUESTART}%`;
+  imgUploadPreview.style = `transform: scale(${SCALE_VALUE_START / 100})`;
+  scaleValue.value = `${SCALE_VALUE_START}%`;
 });
