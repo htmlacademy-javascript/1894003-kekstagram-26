@@ -1,4 +1,3 @@
-// import {similarPhotos} from './data.js';
 import { showBigPicture } from './pictures-big.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');

@@ -1,12 +1,17 @@
 import { renderPictures } from './pictures.js';
+import { getFilteredPhotos } from './util.js';
 
-const uploadList = document.querySelector('.pictures');
+const picturesContainer = document.querySelector('.pictures');
+const filteredSection = document.querySelector('.img-filters');
 
 const loadImages = () => {
   fetch('https://26.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((photos) => {
-      uploadList.appendChild(renderPictures(photos));
+      localStorage.setItem('photos', JSON.stringify(photos));
+      const filteredPhotos = getFilteredPhotos(photos);
+      picturesContainer.appendChild(renderPictures(filteredPhotos));
+      filteredSection.classList.remove('img-filters--inactive');
     });
 };
 
@@ -19,7 +24,7 @@ const sendImage = (data) => {
   });
 };
 
-const createRequest = function (onSuccess, onError) {
+const createRequest = (onSuccess, onError) => {
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
@@ -33,7 +38,7 @@ const createRequest = function (onSuccess, onError) {
 };
 
 // отправка данных на сервер
-const sendImageAJAX = function (data, onLoad, onError) {
+const sendImageAJAX = (data, onLoad, onError) => {
   const xhr = createRequest(onLoad, onError);
   xhr.open('POST', 'https://26.javascript.pages.academy/kekstagram');
   xhr.send(data);
