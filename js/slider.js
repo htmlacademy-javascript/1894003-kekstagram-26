@@ -38,8 +38,7 @@ sliderElement.noUiSlider.on('update', (values) => {
   imgUploadPreview.style.filter = selectedEffect.setEffect(currentSliderValue);
 });
 
-//оригинал
-originalElement.addEventListener('click', () => {
+export const setOriginalEffect = () => {
   currentEffect = 'none';
   sliderContainer.classList.add('hidden');
   imgUploadPreview.classList.remove('effects__preview--chrome');
@@ -48,7 +47,11 @@ originalElement.addEventListener('click', () => {
   imgUploadPreview.classList.remove('effects__preview--phobos');
   imgUploadPreview.classList.remove('effects__preview--heat');
   imgUploadPreview.style = EFFECTS[0];
-});
+  originalElement.checked = true;
+};
+
+//оригинал
+originalElement.addEventListener('click', setOriginalEffect);
 
 //хром
 chromeElement.addEventListener('click', () => {

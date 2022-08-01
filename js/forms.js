@@ -1,4 +1,6 @@
+import { setOriginalEffect } from './slider.js';
 import './validation.js';
+import { pristine } from './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const uploadForm = document.querySelector('.img-upload__overlay');
@@ -14,9 +16,17 @@ uploadInput.addEventListener('change', onClickForm);
 
 const closeUploadButton = document.querySelector('#upload-cancel');
 
-const closeOnClickForm = () => {
+export const closeUploadForm = () => {
+  document.querySelector('.img-upload__form').reset();
   uploadForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  uploadInput.value = '';
+  setOriginalEffect();
+  pristine.reset();
+};
+
+const closeOnClickForm = () => {
+  closeUploadForm();
 };
 
 closeUploadButton.addEventListener('click', closeOnClickForm);
@@ -27,8 +37,7 @@ const closeOnKeyForm = (evt) => {
     evt.target !== hashtagInput &&
     evt.target !== commentTextarea
   ) {
-    uploadForm.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+    closeOnClickForm();
   }
 };
 

@@ -1,6 +1,5 @@
 import { renderPictures } from './pictures.js';
-
-const uploadForm = document.querySelector('.img-upload__overlay');
+import { closeUploadForm } from './forms.js';
 
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -12,25 +11,42 @@ const getRandomPositiveInteger = (a, b) => {
 const showAlert = () => {
   const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
   document.body.appendChild(errorMessage);
-  uploadForm.classList.add('hidden');
+  closeUploadForm();
 
-  const hideHandler = () => {
-    errorMessage.remove();
+  const onAlertClick = (e) => {
+    if (!e.target.closest('.error__inner') || e.target.closest('.error__button')) {
+      errorMessage.remove();
+    }
   };
 
-  errorMessage.addEventListener('click', hideHandler);
+  const onAlertEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      errorMessage.remove();
+    }
+  };
+  errorMessage.addEventListener('click', onAlertClick);
+  errorMessage.addEventListener('click', onAlertEsc);
 };
 
 const showSuccess = () => {
   const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
   document.body.appendChild(successMessage);
-  uploadForm.classList.add('hidden');
+  closeUploadForm();
 
-  const hideHandler = () => {
-    successMessage.remove();
+  const onAlertEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      successMessage.remove();
+    }
   };
 
-  successMessage.addEventListener('click', hideHandler);
+  const onAlertClick = (e) => {
+    if (!e.target.closest('.success__inner') || e.target.closest('.success__button')) {
+      successMessage.remove();
+    }
+  };
+
+  successMessage.addEventListener('keydown', onAlertEsc);
+  successMessage.addEventListener('click', onAlertClick);
 };
 
 const debounce = (callback, timeoutDelay = 500) => {

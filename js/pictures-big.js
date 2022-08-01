@@ -36,6 +36,8 @@ const changeCommentsCount = () => {
   socialCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${commentsLenth}</span> комментариев`;
 };
 
+const commentShown = 5;
+
 const showBigPicture = (picture) => {
   modalWindow.classList.remove('hidden');
 
@@ -48,7 +50,7 @@ const showBigPicture = (picture) => {
   commentsLenth = picture.comments.length;
   commentsForPicture = picture.comments;
   modalWindow.querySelector('.comments-loader').classList.remove('hidden');
-  commentsCount = 5;
+  commentsCount = commentShown;
   modalWindow.querySelector('.social__caption').textContent =
     picture.description;
   const comments = modalWindow.querySelector('.social__comments');
@@ -57,7 +59,7 @@ const showBigPicture = (picture) => {
     renderComments(picture.comments.slice(0, commentsCount))
   );
 
-  if (commentsLenth <= 5) {
+  if (commentsLenth <= commentShown) {
     modalWindow.querySelector('.comments-loader').classList.add('hidden');
     commentsCount = commentsLenth;
   }
@@ -67,8 +69,8 @@ const showBigPicture = (picture) => {
 const commentsLoader = modalWindow.querySelector('.comments-loader');
 
 const addNextComments = () => {
-  if (commentsLenth > commentsCount + 5) {
-    commentsCount += 5;
+  if (commentsLenth > commentsCount + commentShown) {
+    commentsCount += commentShown;
   } else {
     commentsCount = commentsLenth;
     modalWindow.querySelector('.comments-loader').classList.add('hidden');
