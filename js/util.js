@@ -1,6 +1,5 @@
 import { renderPictures } from './pictures.js';
-
-const uploadForm = document.querySelector('.img-upload__overlay');
+import { closeUploadForm } from './forms.js';
 
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -12,24 +11,28 @@ const getRandomPositiveInteger = (a, b) => {
 const showAlert = () => {
   const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
   document.body.appendChild(errorMessage);
-  uploadForm.classList.add('hidden');
+  closeUploadForm();
 
   const onAlertEsc = (evt) => {
-    // errorMessage.remove();
     if (evt.key === 'Escape') {
       errorMessage.remove();
     }
   };
+
+  const onAlertClick = (e) => {
+    if (!e.target.closest('.error__inner') || e.target.closest('.error__button')) {
+      errorMessage.remove();
+    }
+  };
+
   errorMessage.addEventListener('click', onAlertEsc);
+  errorMessage.querySelector('.error__button').addEventListener('click', onAlertClick);
 };
 
 const showSuccess = () => {
   const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
   document.body.appendChild(successMessage);
-  uploadForm.classList.add('hidden');
-
-  const successButton = successMessage.querySelector('#success').content.querySelector('.success__inner').cloneNode(true);
-  successMessage.appendChild(successButton);
+  closeUploadForm();
 
   const onAlertEsc = (evt) => {
     if (evt.key === 'Escape') {
@@ -37,12 +40,14 @@ const showSuccess = () => {
     }
   };
 
-  const onAlertClick = () => {
-    successMessage.remove();
+  const onAlertClick = (e) => {
+    if (!e.target.closest('.success__inner') || e.target.closest('.success__button')) {
+      successMessage.remove();
+    }
   };
 
   successMessage.addEventListener('keydown', onAlertEsc);
-  successButton.addEventListener('click', onAlertClick);
+  successMessage.querySelector('.success__button').addEventListener('click', onAlertClick);
 };
 
 const debounce = (callback, timeoutDelay = 500) => {

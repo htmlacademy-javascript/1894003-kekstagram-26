@@ -1,3 +1,4 @@
+import { setOriginalEffect } from './slider.js';
 import './validation.js';
 import { pristine } from './validation.js';
 
@@ -15,11 +16,17 @@ uploadInput.addEventListener('change', onClickForm);
 
 const closeUploadButton = document.querySelector('#upload-cancel');
 
-const closeOnClickForm = () => {
+export const closeUploadForm = () => {
+  document.querySelector('.img-upload__form').reset();
   uploadForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadInput.value = '';
+  setOriginalEffect();
   pristine.reset();
+};
+
+const closeOnClickForm = () => {
+  closeUploadForm();
 };
 
 closeUploadButton.addEventListener('click', closeOnClickForm);
