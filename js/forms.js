@@ -1,4 +1,5 @@
 import './validation.js';
+import { pristine } from './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const uploadForm = document.querySelector('.img-upload__overlay');
@@ -17,6 +18,8 @@ const closeUploadButton = document.querySelector('#upload-cancel');
 const closeOnClickForm = () => {
   uploadForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  uploadInput.value = '';
+  pristine.reset();
 };
 
 closeUploadButton.addEventListener('click', closeOnClickForm);
@@ -27,8 +30,7 @@ const closeOnKeyForm = (evt) => {
     evt.target !== hashtagInput &&
     evt.target !== commentTextarea
   ) {
-    uploadForm.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+    closeOnClickForm();
   }
 };
 

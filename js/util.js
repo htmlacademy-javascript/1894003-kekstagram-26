@@ -14,11 +14,13 @@ const showAlert = () => {
   document.body.appendChild(errorMessage);
   uploadForm.classList.add('hidden');
 
-  const hideHandler = () => {
-    errorMessage.remove();
+  const onAlertEsc = (evt) => {
+    // errorMessage.remove();
+    if (evt.key === 'Escape') {
+      errorMessage.remove();
+    }
   };
-
-  errorMessage.addEventListener('click', hideHandler);
+  errorMessage.addEventListener('click', onAlertEsc);
 };
 
 const showSuccess = () => {
@@ -26,11 +28,21 @@ const showSuccess = () => {
   document.body.appendChild(successMessage);
   uploadForm.classList.add('hidden');
 
-  const hideHandler = () => {
+  const successButton = successMessage.querySelector('#success').content.querySelector('.success__inner').cloneNode(true);
+  successMessage.appendChild(successButton);
+
+  const onAlertEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      successMessage.remove();
+    }
+  };
+
+  const onAlertClick = () => {
     successMessage.remove();
   };
 
-  successMessage.addEventListener('click', hideHandler);
+  successMessage.addEventListener('keydown', onAlertEsc);
+  successButton.addEventListener('click', onAlertClick);
 };
 
 const debounce = (callback, timeoutDelay = 500) => {
