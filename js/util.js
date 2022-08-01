@@ -13,20 +13,19 @@ const showAlert = () => {
   document.body.appendChild(errorMessage);
   closeUploadForm();
 
-  const onAlertEsc = (evt) => {
-    if (evt.key === 'Escape') {
-      errorMessage.remove();
-    }
-  };
-
   const onAlertClick = (e) => {
     if (!e.target.closest('.error__inner') || e.target.closest('.error__button')) {
       errorMessage.remove();
     }
   };
 
+  const onAlertEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      errorMessage.remove();
+    }
+  };
+  errorMessage.addEventListener('click', onAlertClick);
   errorMessage.addEventListener('click', onAlertEsc);
-  errorMessage.querySelector('.error__button').addEventListener('click', onAlertClick);
 };
 
 const showSuccess = () => {
@@ -47,7 +46,7 @@ const showSuccess = () => {
   };
 
   successMessage.addEventListener('keydown', onAlertEsc);
-  successMessage.querySelector('.success__button').addEventListener('click', onAlertClick);
+  successMessage.addEventListener('click', onAlertClick);
 };
 
 const debounce = (callback, timeoutDelay = 500) => {
